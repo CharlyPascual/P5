@@ -1,0 +1,16 @@
+
+#centro{
+	display: block;
+	position: relative;
+	margin: 0 100px;
+	width: 640px;
+	height:480px;
+}
+
+#derecha{
+	display: block;
+	position: relative;
+	margin: 0 100px;
+	width: 640px;
+	height:480px;
+}
