@@ -42,29 +42,3 @@ var conb = function (b){
   }
 }
 var myp5 = new p5 (conb,'derecha');
-// function setup() {
-//   // put setup code here
-//   var myCanvas = createCanvas(640,480);
-//   myCanvas.parent('centro');
-
-//   smooth();
-//   noStroke();
-//   background(128);
-//   //strokeWeight(5);
-//   //
-
-// }
-
-
-// function draw() {
-
-//   if (mouseIsPressed) {
-//   	fill(random(255),0,0);
-//   }
-//   else
-//   {
-//   	fill(random(255));
-//   }
-
-//   ellipse(mouseX, mouseY, 80, 80);
-// }
