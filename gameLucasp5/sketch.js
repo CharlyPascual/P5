@@ -7,7 +7,7 @@ function setup() {
   createCanvas(1024,680);
   for(var i = 0; i < animals.length; i++)
   {
-    var animalName = "animal" + i + ".jpg";
+    var animalName = "animals/animal" + i + ".jpg";
     animals[i] = loadImage(animalName);
     println(animalName);
   }
