@@ -1,28 +1,28 @@
-
+/////////////////////
+//cpb 24nov2014
+/////////////////////
 var numOfAnimals = 9;
 var animals = [];
-animals[numOfAnimals] = new Animal();
+var stub, extension, num;
 var currentAnimal = 0;
-function setup() {
-  createCanvas(1024,680);
-  for(var i = 0; i < animals.length; i++)
-  {
-    var animalName = "animals/animal" + i + ".jpg";
-    animals[i] = loadImage(animalName);
-    println(animalName);
-  }
-}
 
+function setup() {
+  createCanvas(1024, 680);
+  animals = Animal("animals/animal", ".jpg", numOfAnimals);
+
+}
 function draw() {
   background(128);
-  image(animals[currentAnimal],0,0);
-  currentAnimal++;
-  if(currentAnimal >= animals.length)
+  image(animals[currentAnimal], 20, 100);
+}
+function Animal(stub, extension, num) {
+  for (var i = 0; i < 9; i++) 
   {
-  currentAnimal = 0;
+    var animalName = loadImage(stub + i + extension);
+    animals = append(animals,animalName);
   }
+  return animals;
 }
-
-function Animal(){
-  
-}
+//function getImage(img) {
+  //animals.push(img);
+//}
