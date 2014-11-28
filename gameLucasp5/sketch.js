@@ -4,7 +4,7 @@
 var numOfAnimals = 9;
 var animals = [];
 var stub, extension, num;
-var currentAnimal = 3;
+var currentAnimal = 3; //example
 
 function setup() {
   createCanvas(1024, 680);
