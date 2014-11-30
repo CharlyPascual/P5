@@ -1,9 +1,9 @@
 /////////////////////
 //cpb 24nov2014
+//p5.js
 /////////////////////
 
 /////////////////////////////////////////////////
-var h = 0; //future variable global indice del sistemas de eleccion, 
 var score = 0;
 ////////////////////////
 var numberOfAnimals = 9; // number of photos to show
@@ -12,72 +12,63 @@ var numberLoadAnimals = 9; // number of photos to choose
 
 //eleccion del indice de  fotos/sonidos
 var animals = [];
-var stub, extension, num;
+var stub;
+var extension;
+var num;
 /////////////////////////////////////////////////
 //fotos animales , posiciones
 var margin = (1024 / 100) * 2;
-var visualizePhoto = true; // switch show photos
 
-var currentPhoto = 0; // index arrays de photos
+var currentPhoto = 0; // index arrays photos
 var onSeeX = margin;
 var onSeeY = margin;
-var widthX = 300; //width photo de cada foto
+var widthX = 300; //width photo
 var heightY = 169; //height photo
 var marginY = 100;
-var selectionA = 0; // ojo lo he cambiado si no le doy un varlor por defecto tiene 0
-var selectionB = 100; // y no funcionaria bien los botones
 //fin_fotos
 /////////////////////////////////////////////////
-
-
 function setup() {
   createCanvas(1024, 680);
-  animals = Animal("animals/animal", ".jpg", numberOfAnimals);
-
+  fill(0);
+  textSize(28);
+  background(255);
+  animal("animals/animal",".jpg",numberOfAnimals);
 }
 
 function draw() {
+  //background(255);
   //display photo
   displayPhoto();
   //display score
-  fill(0);
-  textSize(28);
   text("SCORE: " + score, margin, margin * 2);
-
 }
 
-function Animal(stub, extension, num) {
-  for (var i = 0; i < numberOfAnimals ; i++) {
-
+function animal(stub, extension, num) {
+  for (var i = 0; i < numberOfAnimals; i++) {
     loadImage(stub + i + extension, getImage);
     print(stub + i + extension);
   }
-  return animals;
 }
 
 function getImage(img) {
   animals.push(img);
 }
-
 function displayPhoto() {
-  if (visualizePhoto) {
-    print(" numero de fotos: " + currentPhoto);
+  
+  if (currentPhoto >= animals.length) return;
+  
+    print("number of photos: " + currentPhoto +" and " + animals.length);
     //print(visualizePhoto);
-
-    //image(animals[numbers[h]], onSeeX, marginY, animals[0].width, animals[0].height);
-    image(animals[h], onSeeX, marginY, widthX, heightY);
-
-    h += 1;
-    onSeeX += widthX + margin;
+ 
+    image(animals[currentPhoto++], onSeeX, marginY, widthX, heightY);
+    
+    onSeeX += (widthX + margin);
     if ((onSeeX + widthX) >= (width - margin)) {
       onSeeX = margin;
       marginY += (heightY + margin);
     }
-    currentPhoto += 1;
-    if (currentPhoto >= numberOfAnimals) {
-      visualizePhoto = !visualizePhoto;
-      //print(visualizePhoto);
+    if (currentPhoto == numberOfAnimals) {
       marginY = 100;
+     noLoop();
     }
-  }
 }

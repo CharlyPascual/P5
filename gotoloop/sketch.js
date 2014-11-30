@@ -13,8 +13,7 @@ function draw() {
 }
  
 function requestImages(path, ext, qty) {
-  for (var i = -1; i !== qty;
-    loadImage(path + i++ + ext, getImage));
+  for (var i = 0; i !== qty;loadImage(path + i++ + ext, getImage));
 }
  
 function getImage(img) {
