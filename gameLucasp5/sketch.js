@@ -12,8 +12,8 @@ var numberLoadAnimals = 9; // number of photos to choose
 
 //eleccion del indice de  fotos/sonidos
 var animals = [];
-var stub;
-var extension;
+var path = "animals/animal";
+var extension = ".jpg";
 var num;
 /////////////////////////////////////////////////
 //fotos animales , posiciones
@@ -28,8 +28,8 @@ var marginY = 100;
 //fin_fotos
 /////////////////////////////////////////////////
 function preload() {
-  for (var i = 0; i != QTY; print("Idx: #" + i)
-    , animals[i] = loadImage(PATH + i++ + EXT));
+  for (var i = 0; i != numberOfAnimals; print("Idx: #" + i)
+    , animals[i] = loadImage(path + i++ + extension));
 }
 
 
@@ -38,7 +38,7 @@ function setup() {
   fill(0);
   textSize(28);
   background(255);
-  animal("animals/animal",".jpg",numberOfAnimals);
+ // animal("animals/animal",".jpg",numberOfAnimals);
 }
 
 function draw() {
@@ -49,19 +49,19 @@ function draw() {
   text("SCORE: " + score, margin, margin * 2);
 }
 
-function animal(stub, extension, num) {
-  for (var i = 0; i < numberOfAnimals; i++) {
-    loadImage(stub + i + extension, getImage);
-    print(stub + i + extension);
-  }
-}
+//function animal(stub, extension, num) {
+  //for (var i = 0; i < numberOfAnimals; i++) {
+    //loadImage(stub + i + extension, getImage);
+    //print(stub + i + extension);
+//  }
+//}
 
-function getImage(img) {
-  animals.push(img);
-}
+//function getImage(img) {
+//  animals.push(img);
+//}
 function displayPhoto() {
   
-  if (currentPhoto >= animals.length) return;
+  //if (currentPhoto >= animals.length) return;
   
     print("number of photos: " + currentPhoto +" and " + animals.length);
     //print(visualizePhoto);
