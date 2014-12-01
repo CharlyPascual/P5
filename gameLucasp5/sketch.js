@@ -27,6 +27,12 @@ var heightY = 169; //height photo
 var marginY = 100;
 //fin_fotos
 /////////////////////////////////////////////////
+function preload() {
+  for (var i = 0; i != QTY; print("Idx: #" + i)
+    , animals[i] = loadImage(PATH + i++ + EXT));
+}
+
+
 function setup() {
   createCanvas(1024, 680);
   fill(0);
