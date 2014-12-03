@@ -45,7 +45,7 @@ function setup() {
   fill(0);
   textSize(28);
   background(255);
-  sample[random(0,5)].loop();
+  sample[5].loop();
 }
 
 function draw() {
