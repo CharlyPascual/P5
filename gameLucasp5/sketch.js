@@ -37,12 +37,15 @@ var marginY = 100;
 //end_photos
 /////////////////////////////////////////////////
 function preload() {
+  //genero el indice aleatorio para asociar sonidos y imagenes
+  generate(9); 
   //load images
   for (var i = 0; i != numberOfAnimals; print(path + i)
     , animals[i] = loadImage(path + i++ + extension));
   //load sounds  
-  for (var h = 0; h != numberOfAnimals; print(trackNameList[h])  
-    ,sample[h] = loadSound("sounds/" + trackNameList[h++]));
+  
+  for (var h = 0; h != numberOfAnimals; print(trackNameList[numbers[h]])  
+    ,sample[h] = loadSound("sounds/" + trackNameList[numbers[h++]]));
 }
 
 
@@ -50,10 +53,11 @@ function setup() {
   createCanvas(1024, 680);
   //fill(0);
   //textSize(28);
-  background(255);
+  background(0);
   //sample[int(random(5))].loop();
-  
-  generate(9);
+  for(i = 0; i !=numberOfAnimals;i++ ){
+  displayPhoto();
+  }
   sonar()
 }
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
@@ -67,22 +71,19 @@ function setup() {
 function generate(length)
 {
     
-    var n;
-    for(var i=0; i<length; i++)
-    {
-        do
-            n = Math.floor(Math.random()*9);
-        while(numbers.indexOf(n) !== -1)
-            print(n);
-       numbers[i] = n;
-    }
-    return numbers;
+  var n;
+  for(var i=0; i<length; i++)
+  {
+    do
+        n = Math.floor(Math.random()*9);
+    while(numbers.indexOf(n) !== -1)
+    print(i+' '+n);
+    numbers[i] = n;
+  }
+  return numbers;
 }
 
 function sonar(){
-    fill(204);
-  noStroke();
-  rect(0, 0, 182, 50); // fondo del marcador
  b = createButton('SOUNDS');
  b.position(int(widthX+margin*2),int(margin));
  b.mousePressed(animalSound);
@@ -90,13 +91,17 @@ function sonar(){
 }
 
 function draw() {
+   //display score
+       fill(0);
+  noStroke();
+  rect(0, 0, 182, 50); // fondo del marcador
+   fill(255);
+  textSize(28);
+  text("SCORE: " + score, margin, margin * 2);
   //background(255);
   //display photo
- displayPhoto();
-  //display score
-   fill(0);
-  textSize(28);
-  text(score, margin, margin * 2);
+ //displayPhoto();
+ 
 }
 
 function scores(){
@@ -113,13 +118,13 @@ function displayPhoto() {
     }
     if (currentPhoto == numberOfAnimals) {
       marginY = 100;
-     noLoop();
+     //noLoop();
     }
 }
 
-function animalSound(){
+function animalSound(){       
   selectionA = int(random(0, numberOfAnimals)); //seleciono un sonido de animal
-    print("sonido selectionA: [" + trackNameList[selectionA] + "]");
+    print("sonido selectionA: "+ selectionA+" [ "+ trackNameList[numbers[selectionA]] + "]");
     switch(selectionA)
     {
     case 0:
@@ -169,58 +174,60 @@ function mousePressed() {
   //onSeeX += widthX + margin;
   println("x: " + mouseX + " y: " + mouseY);
  
-  print(score);
+  
   if ((mouseX >= margin && mouseX <= widthX + margin)
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
-    && (selectionA === 0)) {
+    &&(selectionA === 0)) {
     score += 1;
   
   }
   if ((mouseX >= 2*margin + widthX)
-    && (mouseX <= 2 * (widthX + margin))
-    && (mouseY >= marginY && mouseY <= marginY + heightY)
-    && (selectionA == 1)) {
+    &&(mouseX <= 2 * (widthX + margin))
+    &&(mouseY >= marginY && mouseY <= marginY + heightY)
+    &&(selectionA == 1)) {
     score += 1;
     
   }
   if ((mouseX >= 2*margin + 2*widthX + margin)
-    && (mouseX <= 3 * (widthX + margin))
-    && (mouseY >= marginY && mouseY <= marginY + heightY)
-    && (selectionA == 2)) {
+    &&(mouseX <= 3 * (widthX + margin))
+    &&(mouseY >= marginY && mouseY <= marginY + heightY)
+    &&(selectionA == 2)) {
     score += 1;
   }
 
   if ((mouseX >= margin && mouseX <= widthX + margin) 
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
-    && (selectionA == 3)) {
+    &&(selectionA == 3)) {
     score += 1;
   
   }
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
-    && (selectionA == 4)) {
+    &&(selectionA == 4)) {
     score += 1;
   }
   if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
-    && (selectionA == 5)) {
+    &&(selectionA == 5)) {
     score += 1;
   }/////
-  if ((mouseX >= margin && mouseX <= widthX + margin) 
+  if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
     &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
-    && (selectionA == 6)) {
+    &&(selectionA == 6)) {
     score += 1;
   }
-  if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
-    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
-    && (selectionA == 7)) {
+  if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
+    &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
+    &&(selectionA == 7))) {
     score += 1;
   }
-  if ((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
-    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
-    && (selectionA == 8)) {
+  if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
+    &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
+    &&(selectionA == 8))) {
     score += 1;
   }
+  print(score);
+  return false;
 }//generarlo para cada foto 9 en total
 
 
