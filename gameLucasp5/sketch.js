@@ -99,6 +99,10 @@ function draw() {
   text(score, margin, margin * 2);
 }
 
+function scores(){
+  text(score, margin, margin * 2);
+}
+
 function displayPhoto() {
     image(animals[numbers[h++]], onSeeX, marginY, widthX, heightY);
     currentPhoto++;
@@ -203,17 +207,17 @@ function mousePressed() {
     score += 1;
   }/////
   if ((mouseX >= margin && mouseX <= widthX + margin) 
-    &&(mouseY >= marginY + 2 * (heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
+    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     && (selectionA == 6)) {
     score += 1;
   }
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
-    &&(mouseY >= marginY + 2 * (heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
+    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     && (selectionA == 7)) {
     score += 1;
   }
   if ((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
-    &&(mouseY >= marginY + 2 * (heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
+    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     && (selectionA == 8)) {
     score += 1;
   }
