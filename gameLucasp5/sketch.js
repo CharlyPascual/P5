@@ -6,9 +6,10 @@
 /////////////////////////////////////////////////
 var score = 0;
 
-//load buttos
-var input, b, soundplay;
-var ph;
+//load buttons
+var b;
+var ph; //load photo
+var c; //reload phto
 ////////////////////////
 var numberOfAnimals = 9; // number of photos to show
 var numberIndice = 8; // 0,1,2....
@@ -59,6 +60,7 @@ function setup() {
   
   sonar();
   photo();
+  reg();
 }
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
 //the while loop is a do/while. Which means it will run the inline 
@@ -89,9 +91,19 @@ function sonar(){
  b.mousePressed(animalSound);
 }
 function photo(){
- b = createButton('LOAD PHOTOA');
- b.position(int(widthX+margin*6),int(margin));
- b.mousePressed(displayPhoto);
+ ph = createButton('LOAD IMAGE');
+ ph.position(int(widthX+margin*6),int(margin));
+ ph.mousePressed(displayPhoto);
+}
+function reg(){
+ c = createButton('RELOAD IMAGE');
+ c.position(int(widthX+margin*12),int(margin));
+ c.mousePressed(regenerate)
+ 
+}
+function regenerate(){
+   generate(9);
+  //displayPhoto();
 }
 
 function draw() {
@@ -119,11 +131,12 @@ function displayPhoto() {
       marginY += (heightY + margin);
     }
   }
-    if (currentPhoto == numberOfAnimals) {
+    if (currentPhoto <= numberOfAnimals) {
       marginY = 100;
-      //currentPhoto = 0;
-      //onSeeX = margin;
-      //h = 0;
+      currentPhoto = 0;
+      onSeeX = margin;
+      h = 0;
+      print('hache: ' + h);
      //noLoop();
     }
   
