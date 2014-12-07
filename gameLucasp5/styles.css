@@ -102,3 +102,7 @@ section {
 li {
   list-style-type: none;
 }
+body{
+ background : black;
+ margin : auto 0;
+}

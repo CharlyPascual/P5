@@ -8,6 +8,7 @@ var score = 0;
 
 //load buttos
 var input, b, soundplay;
+var ph;
 ////////////////////////
 var numberOfAnimals = 9; // number of photos to show
 var numberIndice = 8; // 0,1,2....
@@ -55,10 +56,9 @@ function setup() {
   //textSize(28);
   background(0);
   //sample[int(random(5))].loop();
-  for(i = 0; i !=numberOfAnimals;i++ ){
-  displayPhoto();
-  }
-  sonar()
+  
+  sonar();
+  photo();
 }
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
 //the while loop is a do/while. Which means it will run the inline 
@@ -87,39 +87,46 @@ function sonar(){
  b = createButton('SOUNDS');
  b.position(int(widthX+margin*2),int(margin));
  b.mousePressed(animalSound);
- 
+}
+function photo(){
+ b = createButton('LOAD PHOTOA');
+ b.position(int(widthX+margin*6),int(margin));
+ b.mousePressed(displayPhoto);
 }
 
 function draw() {
-   //display score
-       fill(0);
+  //displayPhoto();
+  //display score
+  fill(0);
   noStroke();
   rect(0, 0, 182, 50); // fondo del marcador
-   fill(255);
+  fill(255);
   textSize(28);
   text("SCORE: " + score, margin, margin * 2);
-  //background(255);
-  //display photo
- //displayPhoto();
- 
+
 }
 
-function scores(){
-  text(score, margin, margin * 2);
-}
+
+
 
 function displayPhoto() {
-    image(animals[numbers[h++]], onSeeX, marginY, widthX, heightY);
+  for(h = 0; h !=numberOfAnimals;h++ ){
+    image(animals[numbers[h]], onSeeX, marginY, widthX, heightY);
     currentPhoto++;
     onSeeX += (widthX + margin);
     if ((onSeeX + widthX) >= (width - margin)) {
       onSeeX = margin;
       marginY += (heightY + margin);
     }
+  }
     if (currentPhoto == numberOfAnimals) {
       marginY = 100;
+      //currentPhoto = 0;
+      //onSeeX = margin;
+      //h = 0;
      //noLoop();
     }
+  
 }
 
 function animalSound(){       
