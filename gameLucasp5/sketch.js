@@ -5,11 +5,13 @@
 
 /////////////////////////////////////////////////
 var score = 0;
-var gren = false;
+var sound = false;
+var gren = 0;
 var verde = 50;
-var circle = 50;
 var estela = 4;
+var transparency = 126;
 var selectionA = null;
+var circle = 50;
 
 //load buttons
 var b;
@@ -27,6 +29,7 @@ h = 0; //indexador a 0
 var animals = [];
 var path = "animals/animal";
 var extension = ".jpg";
+
 
 //loading sound track
 sample = [];
@@ -61,10 +64,11 @@ function preload() {
 function setup() {
   createCanvas(1024, 680);
   background(0);
-  frameRate(10);
+  frameRate(8);
   sonar();
   //photo(); // de momento lo quito
   reg();
+  print(score + ' ' + gren + ' ' + selectionA + ' ' + sound)
 }
 
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
@@ -104,7 +108,7 @@ function regenerate(){
    numbers.length = 0; //http://davidwalsh.name/empty-array
    animals.length = 0;
    sample.length = 0;
-   gren = false;
+   gren = 0;
    preload();
    //setTimeout(displayPhoto,5000);
 }
@@ -126,28 +130,34 @@ function draw() {
    stroke(255,153,0,126);
   strokeWeight(10);
    ellipse(mouseX,mouseY,100,100)
-if (gren && (selectionA != null)) {
+if (gren == 3 && (selectionA != null)) {
     //congratulations();
    noFill();
    verde += 12;
     estela += 4;
-    stroke(0,255,0,126);
+    transparency -= 2;
+    //print(transparency);
+    stroke(0,255,0,transparency);
     strokeWeight(estela);
     ellipse(mouseX,mouseY,verde,verde)
-    if(verde >= 400){gren = false}
+    if(verde >= 400){
+      gren = 0;
+      verde = 50;
+      estela = 4;
+      transparency = 126;
+      selectionA = null;
+    }
    }
-   // else if (!gren && selectionA != null)
+   // else if ((gren == 2) && selectionA != null )
    // {
    //   noFill();
    // circle += 12;
    //  estela += 4;
    //  stroke(255,0,0,126);
    //  strokeWeight(estela);
-   //  print(estela);
+   //  //print(estela);
    //  ellipse(mouseX,mouseY,circle,circle)
    // }
-    
-    
   
 }
 
@@ -155,7 +165,7 @@ function displayPhoto() {
   for(h = 0; h !=numberOfAnimals;h++ ){
     image(animals[numbers[h]], onSeeX, marginY, widthX, heightY);
     //recuadro a las fotos
-    stroke(247,161,108);
+    stroke(0);
     strokeWeight(2);
     noFill();
     rect(onSeeX, marginY, widthX, heightY);
@@ -167,7 +177,7 @@ function displayPhoto() {
       marginY += (heightY + margin);
     }
   }
-    if (currentPhoto <= numberOfAnimals) {
+    if (currentPhoto == numberOfAnimals) {
       marginY = 100;
       currentPhoto = 0;
       onSeeX = margin;
@@ -178,7 +188,9 @@ function displayPhoto() {
   
 }
 
-function animalSound(){       
+function animalSound(){     
+    sound = true;
+    gren = 2;
   selectionA = int(random(0, numberOfAnimals)); //seleciono un sonido de animal
     print("sound selectionA: "+ selectionA+" [ "+ trackNameList[numbers[selectionA]] + "]");
     switch(selectionA)
@@ -234,7 +246,7 @@ function mousePressed() {
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA === 0)) {
     score += 1;
-   gren = true;
+   gren = 3;
   
   }
   if ((mouseX >= 2*margin + widthX)
@@ -242,55 +254,57 @@ function mousePressed() {
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 1)) {
     score += 1;
-     gren = true;
+     gren = 3;
   }
   if ((mouseX >= 2*margin + 2*widthX + margin)
     &&(mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 2)) {
     score += 1;
- gren = true;
+ gren = 3;
   }
 
   if ((mouseX >= margin && mouseX <= widthX + margin) 
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 3)) {
     score += 1;
- gren = true;
+ gren = 3;
   
   }
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 4)) {
     score += 1;
- gren = true;
+ gren = 3;
   }
   if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 5)) {
     score += 1;
- gren = true;
+ gren = 3;
   }/////
   if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
     &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     &&(selectionA == 6)) {
     score += 1;
- gren = true;
+ gren = 3;
   }
   if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 7))) {
     score += 1;
- gren = true;
+ gren = 3;
   }
   if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 8))) {
     score += 1;
- gren = true;
+ gren = 3;
   }
-  print(score);
-  print(gren);
+  print('aciertos: ' + score);
+  print('gren OK: ' + gren);
+  print('Seleccion: ' + selectionA);
+  print('Hay sonido: ' + sound);
   return false;
 }//generarlo para cada foto 9 en total
 
