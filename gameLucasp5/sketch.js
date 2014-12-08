@@ -40,12 +40,14 @@ var marginY = 100;
 /////////////////////////////////////////////////
 function preload() {
   //genero el indice aleatorio para asociar sonidos y imagenes
+  print("Generando el indice*******");
   generate(9); 
   //load images
+  print("cargando imagenes*******");
   for (var i = 0; i != numberOfAnimals; print(path + i)
     , animals[i] = loadImage(path + i++ + extension));
   //load sounds  
-  
+  print("cargando sonido*******");
   for (var h = 0; h != numberOfAnimals; print(trackNameList[numbers[h]])  
     ,sample[h] = loadSound("sounds/" + trackNameList[numbers[h++]]));
 }
@@ -60,7 +62,7 @@ function setup() {
   
   sonar();
   photo();
-  reg();
+  rege();
 }
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
 //the while loop is a do/while. Which means it will run the inline 
@@ -95,16 +97,20 @@ function photo(){
  ph.position(int(widthX+margin*6),int(margin));
  ph.mousePressed(displayPhoto);
 }
-function reg(){
+function rege(){
  c = createButton('RELOAD IMAGE');
  c.position(int(widthX+margin*12),int(margin));
  c.mousePressed(regenerate)
  
 }
 function regenerate(){
-   generate(9);
-  //displayPhoto();
+   numbers.length = 0; //http://davidwalsh.name/empty-array
+   animals.length = 0;
+   sample.length = 0;
+   preload();
+   setTimeout(displayPhoto,5000);
 }
+
 
 function draw() {
   //displayPhoto();
@@ -117,9 +123,6 @@ function draw() {
   text("SCORE: " + score, margin, margin * 2);
 
 }
-
-
-
 
 function displayPhoto() {
   for(h = 0; h !=numberOfAnimals;h++ ){
