@@ -61,8 +61,9 @@ function setup() {
   //sample[int(random(5))].loop();
   
   sonar();
-  photo();
-  rege();
+  //photo();
+  displayPhoto();
+  reg();
 }
 //http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
 //the while loop is a do/while. Which means it will run the inline 
@@ -97,7 +98,7 @@ function photo(){
  ph.position(int(widthX+margin*6),int(margin));
  ph.mousePressed(displayPhoto);
 }
-function rege(){
+function reg(){
  c = createButton('RELOAD IMAGE');
  c.position(int(widthX+margin*12),int(margin));
  c.mousePressed(regenerate)
@@ -127,6 +128,12 @@ function draw() {
 function displayPhoto() {
   for(h = 0; h !=numberOfAnimals;h++ ){
     image(animals[numbers[h]], onSeeX, marginY, widthX, heightY);
+    //recuadro a las fotos
+    stroke(247,161,108);
+    strokeWeight(2);
+    noFill();
+    rect(onSeeX, marginY, widthX, heightY);
+
     currentPhoto++;
     onSeeX += (widthX + margin);
     if ((onSeeX + widthX) >= (width - margin)) {
