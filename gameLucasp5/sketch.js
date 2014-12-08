@@ -5,7 +5,7 @@
 
 /////////////////////////////////////////////////
 var score = 0;
-
+var green = false;
 //load buttons
 var b;
 var ph; //load photo
@@ -55,27 +55,16 @@ function preload() {
 
 function setup() {
   createCanvas(1024, 680);
-  //fill(0);
-  //textSize(28);
   background(0);
-  //sample[int(random(5))].loop();
-  
   sonar();
-  //photo();
+  //photo(); // de momento lo quito
   displayPhoto();
   reg();
 }
-//http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
-//the while loop is a do/while. Which means it will run the inline 
-//statement and setting the n to a random number, before checking 
-//the criterium. The criterium evaluates if there is such a value 
-//in the array. indexOf(n) returns the integer key for the value of 
-//n if it exists in the array, otherwise it returns -1. Thus, running 
-//the loop again if indexOf does not return -1.
 
+//http://stackoverflow.com/questions/15584716/unique-random-number-generator-javascript
 function generate(length)
 {
-    
   var n;
   for(var i=0; i<length; i++)
   {
@@ -88,6 +77,7 @@ function generate(length)
   return numbers;
 }
 
+//BOTONES
 function sonar(){
  b = createButton('SOUNDS');
  b.position(int(widthX+margin*2),int(margin));
@@ -104,6 +94,7 @@ function reg(){
  c.mousePressed(regenerate)
  
 }
+//RECARGA IMAGENES
 function regenerate(){
    numbers.length = 0; //http://davidwalsh.name/empty-array
    animals.length = 0;
@@ -114,8 +105,8 @@ function regenerate(){
 
 
 function draw() {
-  //displayPhoto();
   //display score
+  background(0);
   fill(0);
   noStroke();
   rect(0, 0, 182, 50); // fondo del marcador
@@ -123,6 +114,18 @@ function draw() {
   textSize(28);
   text("SCORE: " + score, margin, margin * 2);
 
+  displayPhoto();
+  //background(0);
+  noFill();
+   stroke(126);
+  strokeWeight(10);
+   ellipse(mouseX,mouseY,100,100)
+if (!green) {
+    //congratulations();
+     noFill();
+    strokeWeight(4);
+    ellipse(mouseX,mouseY,50,50)
+  };
 }
 
 function displayPhoto() {
@@ -200,15 +203,13 @@ function animalSound(){
     }
 }
 function mousePressed() {
-  //float d = dist(margin+widthX/2, 100+heightY/2, mouseX, mouseY);
-  //onSeeX += widthX + margin;
   println("x: " + mouseX + " y: " + mouseY);
- 
-  
+ var green = false;
   if ((mouseX >= margin && mouseX <= widthX + margin)
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA === 0)) {
     score += 1;
+    green = true;
   
   }
   if ((mouseX >= 2*margin + widthX)
@@ -223,43 +224,63 @@ function mousePressed() {
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 2)) {
     score += 1;
+  green = true;
   }
 
   if ((mouseX >= margin && mouseX <= widthX + margin) 
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 3)) {
     score += 1;
+  green = true;
   
   }
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 4)) {
     score += 1;
+  green = true;
   }
   if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 5)) {
     score += 1;
+  green = true;
   }/////
   if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
     &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     &&(selectionA == 6)) {
     score += 1;
+  green = true;
   }
   if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 7))) {
     score += 1;
+  green = true;
   }
   if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 8))) {
     score += 1;
+  green = true;
   }
   print(score);
+  
   return false;
 }//generarlo para cada foto 9 en total
 
+function congratulations () {
+ 
+  var estela = 4;
+ // alert("hola");
+  //for (var i = 6; i < 200; i++) {
+   
+    noFill();
+    strokeWeight(estela);
+    ellipse(mouseX,mouseY,50,50)
+//  };
+  // body...
+}
 
 
 
