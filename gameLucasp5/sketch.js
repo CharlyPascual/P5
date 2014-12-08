@@ -5,7 +5,12 @@
 
 /////////////////////////////////////////////////
 var score = 0;
-var green = false;
+var gren = false;
+var verde = 50;
+var circle = 50;
+var estela = 4;
+var selectionA = null;
+
 //load buttons
 var b;
 var ph; //load photo
@@ -56,9 +61,9 @@ function preload() {
 function setup() {
   createCanvas(1024, 680);
   background(0);
+  frameRate(10);
   sonar();
   //photo(); // de momento lo quito
-  displayPhoto();
   reg();
 }
 
@@ -99,8 +104,9 @@ function regenerate(){
    numbers.length = 0; //http://davidwalsh.name/empty-array
    animals.length = 0;
    sample.length = 0;
+   gren = false;
    preload();
-   setTimeout(displayPhoto,5000);
+   //setTimeout(displayPhoto,5000);
 }
 
 
@@ -115,17 +121,34 @@ function draw() {
   text("SCORE: " + score, margin, margin * 2);
 
   displayPhoto();
-  //background(0);
+ //puntero grande
   noFill();
-   stroke(126);
+   stroke(255,153,0,126);
   strokeWeight(10);
    ellipse(mouseX,mouseY,100,100)
-if (!green) {
+if (gren && (selectionA != null)) {
     //congratulations();
-     noFill();
-    strokeWeight(4);
-    ellipse(mouseX,mouseY,50,50)
-  };
+   noFill();
+   verde += 12;
+    estela += 4;
+    stroke(0,255,0,126);
+    strokeWeight(estela);
+    ellipse(mouseX,mouseY,verde,verde)
+    if(verde >= 400){gren = false}
+   }
+   // else if (!gren && selectionA != null)
+   // {
+   //   noFill();
+   // circle += 12;
+   //  estela += 4;
+   //  stroke(255,0,0,126);
+   //  strokeWeight(estela);
+   //  print(estela);
+   //  ellipse(mouseX,mouseY,circle,circle)
+   // }
+    
+    
+  
 }
 
 function displayPhoto() {
@@ -157,7 +180,7 @@ function displayPhoto() {
 
 function animalSound(){       
   selectionA = int(random(0, numberOfAnimals)); //seleciono un sonido de animal
-    print("sonido selectionA: "+ selectionA+" [ "+ trackNameList[numbers[selectionA]] + "]");
+    print("sound selectionA: "+ selectionA+" [ "+ trackNameList[numbers[selectionA]] + "]");
     switch(selectionA)
     {
     case 0:
@@ -204,12 +227,14 @@ function animalSound(){
 }
 function mousePressed() {
   println("x: " + mouseX + " y: " + mouseY);
- var green = false;
+
+ //var green = false;
+  
   if ((mouseX >= margin && mouseX <= widthX + margin)
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA === 0)) {
     score += 1;
-    green = true;
+   gren = true;
   
   }
   if ((mouseX >= 2*margin + widthX)
@@ -217,55 +242,55 @@ function mousePressed() {
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 1)) {
     score += 1;
-    
+     gren = true;
   }
   if ((mouseX >= 2*margin + 2*widthX + margin)
     &&(mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 2)) {
     score += 1;
-  green = true;
+ gren = true;
   }
 
   if ((mouseX >= margin && mouseX <= widthX + margin) 
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 3)) {
     score += 1;
-  green = true;
+ gren = true;
   
   }
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 4)) {
     score += 1;
-  green = true;
+ gren = true;
   }
   if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 5)) {
     score += 1;
-  green = true;
+ gren = true;
   }/////
   if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
     &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     &&(selectionA == 6)) {
     score += 1;
-  green = true;
+ gren = true;
   }
   if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 7))) {
     score += 1;
-  green = true;
+ gren = true;
   }
   if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 8))) {
     score += 1;
-  green = true;
+ gren = true;
   }
   print(score);
-  
+  print(gren);
   return false;
 }//generarlo para cada foto 9 en total
 
