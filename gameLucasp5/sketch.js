@@ -11,7 +11,8 @@ var verde = 50;
 var estela = 4;
 var transparency = 126;
 var selectionA = null;
-var circle = 50;
+var rojo = 50;
+var estelaR = 4;
 
 //load buttons
 var b;
@@ -105,10 +106,12 @@ function reg(){
 }
 //RECARGA IMAGENES
 function regenerate(){
+  //Reincio todos los contadores
    numbers.length = 0; //http://davidwalsh.name/empty-array
    animals.length = 0;
    sample.length = 0;
    gren = 0;
+   selectionA = null;
    preload();
    //setTimeout(displayPhoto,5000);
 }
@@ -131,7 +134,7 @@ function draw() {
   strokeWeight(10);
    ellipse(mouseX,mouseY,100,100)
 if (gren == 3 && (selectionA != null)) {
-    //congratulations();
+    //congratulations
    noFill();
    verde += 12;
     estela += 4;
@@ -141,23 +144,33 @@ if (gren == 3 && (selectionA != null)) {
     strokeWeight(estela);
     ellipse(mouseX,mouseY,verde,verde)
     if(verde >= 400){
+      //reinicio ellipse verde
       gren = 0;
       verde = 50;
       estela = 4;
       transparency = 126;
-      selectionA = null;
+      //selectionA = 100;
     }
    }
-   // else if ((gren == 2) && selectionA != null )
-   // {
-   //   noFill();
-   // circle += 12;
-   //  estela += 4;
-   //  stroke(255,0,0,126);
-   //  strokeWeight(estela);
-   //  //print(estela);
-   //  ellipse(mouseX,mouseY,circle,circle)
-   // }
+   else if ((gren == 2) && selectionA != null )
+   {
+    noFill();
+    rojo += 12;
+    estelaR += 4;
+    transparency -= 2;
+    stroke(255,0,0,transparency);
+    strokeWeight(estelaR);
+    //print(estela);
+    ellipse(mouseX,mouseY,rojo,rojo);
+    if(rojo >= 400){
+      //reinicio ellipse roja
+      gren = 0;
+      rojo = 50;
+      estelaR = 4;
+      transparency = 126;
+      //selectionA = 100;
+    }
+   }
   
 }
 
@@ -189,8 +202,6 @@ function displayPhoto() {
 }
 
 function animalSound(){     
-    sound = true;
-    gren = 2;
   selectionA = int(random(0, numberOfAnimals)); //seleciono un sonido de animal
     print("sound selectionA: "+ selectionA+" [ "+ trackNameList[numbers[selectionA]] + "]");
     switch(selectionA)
@@ -247,60 +258,123 @@ function mousePressed() {
     &&(selectionA === 0)) {
     score += 1;
    gren = 3;
-  
   }
+  else if ((mouseX >= margin && mouseX <= widthX + margin)
+    &&(mouseY >= marginY && mouseY <= marginY + heightY)
+    &&(selectionA !== 0 && selectionA != null)){
+    gren = 2;
+    score -= 1;
+
+  }
+
   if ((mouseX >= 2*margin + widthX)
     &&(mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 1)) {
     score += 1;
-     gren = 3;
+    gren = 3;
   }
+    else if ((mouseX >= 2*margin + widthX)
+    &&(mouseX <= 2 * (widthX + margin))
+    &&(mouseY >= marginY && mouseY <= marginY + heightY)
+    &&(selectionA != 1 && selectionA != null)){
+    gren = 2;
+  score -= 1;
+  }
+
   if ((mouseX >= 2*margin + 2*widthX + margin)
     &&(mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY && mouseY <= marginY + heightY)
     &&(selectionA == 2)) {
     score += 1;
- gren = 3;
+    gren = 3;
+  }
+    else if ((mouseX >= 2*margin + 2*widthX + margin)
+    &&(mouseX <= 3 * (widthX + margin))
+    &&(mouseY >= marginY && mouseY <= marginY + heightY)
+    &&(selectionA != 2 && selectionA != null)){
+    gren = 2;
+  score -= 1;
   }
 
   if ((mouseX >= margin && mouseX <= widthX + margin) 
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 3)) {
     score += 1;
- gren = 3;
-  
+    gren = 3;
   }
+    else if ((mouseX >= margin && mouseX <= widthX + margin) 
+    &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
+    &&(selectionA != 3 && selectionA != null)){
+    gren = 2;
+  score -= 1;
+  }
+
   if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 4)) {
     score += 1;
- gren = 3;
+    gren = 3;
   }
+    else if ((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
+    &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
+    &&(selectionA != 4 && selectionA != null)){
+    gren = 2;
+  score -= 1;
+  }
+
   if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
     &&(selectionA == 5)) {
     score += 1;
- gren = 3;
-  }/////
+    gren = 3;
+  }
+    else if ((mouseX >= 3*margin + 2*widthX)  && (mouseX <= 3 * (widthX + margin))
+    &&(mouseY >= marginY + heightY + margin && mouseY <= marginY + 2*heightY + margin)
+    &&(selectionA != 5 && selectionA != null)){
+    gren = 2;
+  score -= 1;
+  }
+
   if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
     &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
     &&(selectionA == 6)) {
     score += 1;
- gren = 3;
+    gren = 3;
   }
+    else if (((mouseX >= margin) && (mouseX <= widthX + margin)) 
+    &&(mouseY >= marginY + 2*(heightY + margin) && mouseY <= marginY + 3*heightY + 2*margin)
+    &&(selectionA != 6 && selectionA != null)){
+    gren = 2;
+  score -= 1;
+  }
+
   if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 7))) {
     score += 1;
- gren = 3;
+    gren = 3;
   }
+    else if (((mouseX >= 2*margin + widthX) && (mouseX <= 2 * (widthX + margin))
+    &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
+    &&(selectionA != 7 && selectionA != null))){
+    gren = 2;
+  score -= 1;
+  }
+
   if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
     &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
     &&(selectionA == 8))) {
     score += 1;
- gren = 3;
+    gren = 3;
   }
+    else if (((mouseX >= 3*margin + 2*widthX) && (mouseX <= 3 * (widthX + margin))
+    &&(mouseY >= marginY + 2*(heightY + margin) && (mouseY <= marginY + 3*heightY + 2*margin))
+    &&(selectionA != 8 && selectionA != null))){
+    gren = 2;
+  score -= 1;
+  }
+
   print('aciertos: ' + score);
   print('gren OK: ' + gren);
   print('Seleccion: ' + selectionA);
@@ -320,6 +394,3 @@ function congratulations () {
 //  };
   // body...
 }
-
-
-
